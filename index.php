@@ -1,7 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: User
- * Date: 23.01.2018
- * Time: 9:18
- */
+require_once "models/helper.php";
+$link = db_connect();
+
+include "views/index_v.php";
