@@ -13,17 +13,24 @@
     <p>Рассказ о форуме</p>
     <h2>Темы форума</h2>
     <div>
-        <h3>Название темы</h3>
-        <p><b>Создана: </b><span>Дата.</span><b> Автор: </b><span>Имя.</span></p>
-        <p><b>Количество ответов: </b><span>Сколько</span></p>
+        <?php
+            foreach ($all_topic as $elem):
+        ?>
+        <h2><?=$elem['topic']; ?></h2>
+        <p><b>Создана: </b><span><?=$elem['date']; ?>.</span><b> Автор: </b><span><?=$elem['author']; ?>.</span></p>
+        <p><b>Количество ответов: </b><span>#Сколько</span></p>
+        <?php
+            endforeach;
+        ?>
     </div>
-    <div>Пагинация</div>
+    <div>#Пагинация</div>
     <div>
         <h2>Создать тему</h2>
-        <form>
+        <form method="POST" action="#">
             <p><input type="text" name="author" placeholder="Ваше имя"></p>
             <p><input type="text" name="topic" placeholder="Название темы"></p>
             <p><textarea rows="20" name="description" placeholder="Описание темы"></textarea></p>
+            <p><input type="submit" name="submit"></p>
         </form>
     </div>
 </body>
