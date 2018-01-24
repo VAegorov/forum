@@ -23,7 +23,23 @@
             endforeach;
         ?>
     </div>
-    <div>#Пагинация</div>
+    <div>#Пагинация
+            <!-- Дальше идёт вывод Pagination -->
+            <div id="pagination">
+                <span>Страницы: </span>
+                <?php if ($active != 1) { ?>
+                    <a href="<?=$url?>" title="Первая страница">&lt;&lt;&lt;</a>
+                    <a href="<?php if ($active == 2) { ?><?=$url?><?php } else { ?><?=$url_page.($active - 1)?><?php } ?>" title="Предыдущая страница">&lt;</a>
+                <?php } ?>
+                <?php for ($i = $start; $i <= $end; $i++) { ?>
+                    <?php if ($i == $active) { ?><span><?=$i?></span><?php } else { ?><a href="<?php if ($i == 1) { ?><?=$url?><?php } else { ?><?=$url_page.$i?><?php } ?>"><?=$i?></a><?php } ?>
+                <?php } ?>
+                <?php if ($active != $count_pages) { ?>
+                    <a href="<?=$url_page.($active + 1)?>" title="Следующая страница">&gt;</a>
+                    <a href="<?=$url_page.$count_pages?>" title="Последняя страница">&gt;&gt;&gt;</a>
+                <?php } ?>
+            </div>
+    </div>
     <div>
         <h2>Создать тему</h2>
         <form method="POST" action="index.php">
