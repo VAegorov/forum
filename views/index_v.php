@@ -16,7 +16,7 @@
         <?php
             foreach ($all_topic as $elem):
         ?>
-        <h2><?=$elem['topic']; ?></h2>
+        <h2><a href="topic.php?id_topic=<?=$elem['id_topic']; ?>"><?=$elem['topic']; ?></a></h2>
         <p><b>Создана: </b><span><?=$elem['date']; ?>.</span><b> Автор: </b><span><?=$elem['author']; ?>.</span></p>
         <p><b>Количество ответов: </b><span><?=countAnsweres($link, $elem['id_topic']); ?></span></p>
         <?php
@@ -30,7 +30,7 @@
             <p><input type="text" name="author" placeholder="Ваше имя"></p>
             <p><input type="text" name="topic" placeholder="Название темы"></p>
             <p><textarea rows="20" name="description" placeholder="Описание темы"></textarea></p>
-            <p><input type="submit" name="submit"></p>
+            <p><input type="submit" name="submit" value="Сохранить"></p>
         </form>
     </div>
 </body>

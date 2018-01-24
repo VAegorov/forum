@@ -23,9 +23,32 @@ function allTopic($link)
 
 function countAnsweres($link, $id_topic)
 {
+    $id_topic = (int) $id_topic;
     $query = "SELECT COUNT(id_description) AS count_answeres FROM description_forum WHERE id_topic=$id_topic";
     $result = mysqli_query($link, $query) or die(mysqli_error($link));
+    $count_answeres_arr = [];
     $count_answeres_arr = mysqli_fetch_assoc($result);
     $count_answeres = $count_answeres_arr['count_answeres'];
     return $count_answeres;
+}
+
+function answeresGet($link, $id_topic)
+{
+    $id_topic = (int) $id_topic;
+    $query = "SELECT date, author, description FROM description_forum WHERE id_topic=$id_topic";
+    $result = mysqli_query($link, $query) or die(mysqli_error($link));
+    $answeres = [];
+    while ($data = mysqli_fetch_assoc($result)) {
+        $answeres[] = $data;//попробовать сделать без while
+    }
+    return $answeres;
+}
+
+function topic($link, $id_topic)
+{
+    $query = "SELECT * FROM forum WHERE id_topic=$id_topic";
+    $result = mysqli_query($link, $query) or die(mysqli_error($link));
+    $topic_arr = [];
+    $topic_arr = mysqli_fetch_assoc($result);
+    return $topic_arr;
 }
