@@ -2,6 +2,8 @@
 require_once "models/helper.php";
 $link = db_connect();
 
+$count_page = countPageTopic($link);
+
 if (isset($_GET['add_topic'])) {
     echo "Тема добавлена";
 }
@@ -25,23 +27,6 @@ if (isset($_POST['submit'])) {
 $all_topic = allTopic($link);
 
 
-/* Пагинация */
-$count_pages = 500;
-$active = 5;
-$count_show_pages = 10;
-$url = "index.php";
-$url_page = "index.php?page=";
-if ($count_pages > 1) { // Всё это только если количество страниц больше 1
-    /* Дальше идёт вычисление первой выводимой страницы и последней (чтобы текущая страница была где-то посредине, если это возможно, и чтобы общая сумма выводимых страниц была равна count_show_pages, либо меньше, если количество страниц недостаточно) */
-    $left = $active - 1;
-    $right = $count_pages - $active;
-    if ($left < floor($count_show_pages / 2)) $start = 1;
-    else $start = $active - floor($count_show_pages / 2);
-    $end = $start + $count_show_pages - 1;
-    if ($end > $count_pages) {
-        $start -= ($end - $count_pages);
-        $end = $count_pages;
-        if ($start < 1) $start = 1;
-    }
-}
+
+
 include "views/index_v.php";

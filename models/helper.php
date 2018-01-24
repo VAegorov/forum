@@ -78,5 +78,42 @@ function addAnswer ($link, $id_topic, $author, $description)
     if ($r == 1) {
         return true;
     } else return false;
-
 }
+
+function countPageTopic($link)
+{
+    $query = "SELECT COUNT(id_topic) AS count FROM forum";
+    $result = mysqli_query($link, $query) or die(mysqli_error($link));
+    $count_arr = mysqli_fetch_assoc($result);
+    $count = $count_arr['count'];
+    return $count;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
