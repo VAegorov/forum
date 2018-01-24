@@ -9,8 +9,8 @@
     <title>Forum</title>
 </head>
 <body>
+    <p><a href="index.php">На главную</a></p>
     <div>
-
             <h1><?=$topic_arr['topic']; ?></h1>
             <p><b>Создана: </b><span><?=$topic_arr['date']; ?>.</span><b> Автор: </b><span><?=$topic_arr['author']; ?>.</span></p>
             <p><b>Количество ответов: </b><span><?=countAnsweres($link, $topic_arr['id_topic']); ?></span></p>
@@ -28,7 +28,7 @@
     <div>#Пагинация</div>
     <div>
         <h2>Добавить ответ</h2>
-        <form method="POST" action="#">
+        <form method="POST" action="topic.php">
             <p><input type="text" name="author" placeholder="Ваше имя"></p>
             <p><textarea rows="20" name="description" placeholder="Ваше сообщение"></textarea></p>
             <p><input type="submit" name="submit" value="Сохранить"></p>
