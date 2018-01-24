@@ -48,7 +48,6 @@ function topic($link, $id_topic)
 {
     $query = "SELECT * FROM forum WHERE id_topic=$id_topic";
     $result = mysqli_query($link, $query) or die(mysqli_error($link));
-    $topic_arr = [];
     $topic_arr = mysqli_fetch_assoc($result);
     return $topic_arr;
 }
@@ -60,6 +59,21 @@ function addTopic ($link, $topic, $author, $description)
     $description = mysqli_real_escape_string($link, trim($description));
     $query = sprintf("INSERT INTO forum (topic, author, description) VALUE ('%s', '%s', '%s')",
         $topic, $author, $description);
+    $result = mysqli_query($link, $query) or die(mysqli_error($link));
+    $r = mysqli_affected_rows($link);
+    if ($r == 1) {
+        return true;
+    } else return false;
+
+}
+
+function addAnswere ($link, $id_topic, $author, $description)
+{
+    $id_topic = mysqli_real_escape_string($link, trim($id_topic));
+    $author = mysqli_real_escape_string($link, trim($author));
+    $description = mysqli_real_escape_string($link, trim($description));
+    $query = sprintf("INSERT INTO description_forum (id_topic, author, description) VALUE ('%s', '%s', '%s')",
+        $id_topic, $author, $description);
     $result = mysqli_query($link, $query) or die(mysqli_error($link));
     $r = mysqli_affected_rows($link);
     if ($r == 1) {

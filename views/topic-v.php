@@ -20,6 +20,7 @@
             foreach ($answeres as $elem):
         ?>
             <p><b><?=$elem['date']; ?> </b><span><?=$elem['author']; ?></span></p>
+            <p><?=$elem['description']; ?></p>
             <br>
         <?php
         endforeach;
@@ -28,7 +29,7 @@
     <div>#Пагинация</div>
     <div>
         <h2>Добавить ответ</h2>
-        <form method="POST" action="topic.php">
+        <form method="POST" action="topic.php?id_topic=<?=$topic_arr['id_topic']; ?>">
             <p><input type="text" name="author" placeholder="Ваше имя"></p>
             <p><textarea rows="20" name="description" placeholder="Ваше сообщение"></textarea></p>
             <p><input type="submit" name="submit" value="Сохранить"></p>
