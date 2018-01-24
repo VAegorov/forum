@@ -18,7 +18,7 @@
         ?>
         <h2><a href="topic.php?id_topic=<?=$elem['id_topic']; ?>"><?=$elem['topic']; ?></a></h2>
         <p><b>Создана: </b><span><?=$elem['date']; ?>.</span><b> Автор: </b><span><?=$elem['author']; ?></span></p>
-        <p><b>Количество ответов: </b><span><?=countAnsweres($link, $elem['id_topic']); ?></span></p>
+        <p><b>Количество ответов: </b><span><?=countAnswers($link, $elem['id_topic']); ?></span></p>
         <?php
             endforeach;
         ?>

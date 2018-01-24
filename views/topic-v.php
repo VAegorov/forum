@@ -13,7 +13,7 @@
     <div>
             <h1><?=$topic_arr['topic']; ?></h1>
             <p><b>Создана: </b><span><?=$topic_arr['date']; ?>.</span><b> Автор: </b><span><?=$topic_arr['author']; ?>.</span></p>
-            <p><b>Количество ответов: </b><span><?=countAnsweres($link, $topic_arr['id_topic']); ?></span></p>
+            <p><b>Количество ответов: </b><span><?=countAnswers($link, $topic_arr['id_topic']); ?></span></p>
             <p><?=$topic_arr['description']; ?></p>
             <h2>Ответы</h2>
         <?php

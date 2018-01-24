@@ -21,27 +21,26 @@ function allTopic($link)
     return $all_topic;
 }
 
-function countAnsweres($link, $id_topic)
+function countAnswers($link, $id_topic)
 {
     $id_topic = (int) $id_topic;
-    $query = "SELECT COUNT(id_description) AS count_answeres FROM description_forum WHERE id_topic=$id_topic";
+    $query = "SELECT COUNT(id_description) AS count_answers FROM description_forum WHERE id_topic=$id_topic";
     $result = mysqli_query($link, $query) or die(mysqli_error($link));
-    $count_answeres_arr = [];
-    $count_answeres_arr = mysqli_fetch_assoc($result);
-    $count_answeres = $count_answeres_arr['count_answeres'];
-    return $count_answeres;
+    $count_answers_arr = mysqli_fetch_assoc($result);
+    $count_answers = $count_answers_arr['count_answers'];
+    return $count_answers;
 }
 
-function answeresGet($link, $id_topic)
+function answersGet($link, $id_topic)
 {
     $id_topic = (int) $id_topic;
     $query = "SELECT date, author, description FROM description_forum WHERE id_topic=$id_topic";
     $result = mysqli_query($link, $query) or die(mysqli_error($link));
-    $answeres = [];
+    $answers = [];
     while ($data = mysqli_fetch_assoc($result)) {
-        $answeres[] = $data;//попробовать сделать без while
+        $answers[] = $data;
     }
-    return $answeres;
+    return $answers;
 }
 
 function topic($link, $id_topic)
@@ -67,7 +66,7 @@ function addTopic ($link, $topic, $author, $description)
 
 }
 
-function addAnswere ($link, $id_topic, $author, $description)
+function addAnswer ($link, $id_topic, $author, $description)
 {
     $id_topic = mysqli_real_escape_string($link, trim($id_topic));
     $author = mysqli_real_escape_string($link, trim($author));
