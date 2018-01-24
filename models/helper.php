@@ -20,3 +20,12 @@ function allTopic($link)
     }
     return $all_topic;
 }
+
+function countAnsweres($link, $id_topic)
+{
+    $query = "SELECT COUNT(id_description) AS count_answeres FROM description_forum WHERE id_topic=$id_topic";
+    $result = mysqli_query($link, $query) or die(mysqli_error($link));
+    $count_answeres_arr = mysqli_fetch_assoc($result);
+    $count_answeres = $count_answeres_arr['count_answeres'];
+    return $count_answeres;
+}
