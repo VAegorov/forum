@@ -17,7 +17,7 @@
             foreach ($all_topic as $elem):
         ?>
         <h2><a href="topic.php?id_topic=<?=$elem['id_topic']; ?>"><?=$elem['topic']; ?></a></h2>
-        <p><b>Создана: </b><span><?=$elem['date']; ?>.</span><b> Автор: </b><span><?=$elem['author']; ?>.</span></p>
+        <p><b>Создана: </b><span><?=$elem['date']; ?>.</span><b> Автор: </b><span><?=$elem['author']; ?></span></p>
         <p><b>Количество ответов: </b><span><?=countAnsweres($link, $elem['id_topic']); ?></span></p>
         <?php
             endforeach;
@@ -26,7 +26,7 @@
     <div>#Пагинация</div>
     <div>
         <h2>Создать тему</h2>
-        <form method="POST" action="#">
+        <form method="POST" action="index.php">
             <p><input type="text" name="author" placeholder="Ваше имя"></p>
             <p><input type="text" name="topic" placeholder="Название темы"></p>
             <p><textarea rows="20" name="description" placeholder="Описание темы"></textarea></p>

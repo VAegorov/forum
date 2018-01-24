@@ -14,12 +14,12 @@
             <h1><?=$topic_arr['topic']; ?></h1>
             <p><b>Создана: </b><span><?=$topic_arr['date']; ?>.</span><b> Автор: </b><span><?=$topic_arr['author']; ?>.</span></p>
             <p><b>Количество ответов: </b><span><?=countAnsweres($link, $topic_arr['id_topic']); ?></span></p>
-        <h2>Ответы</h2>
+            <p><?=$topic_arr['description']; ?></p>
+            <h2>Ответы</h2>
         <?php
             foreach ($answeres as $elem):
         ?>
             <p><b><?=$elem['date']; ?> </b><span><?=$elem['author']; ?></span></p>
-            <p><?=$elem['description']; ?></p>
             <br>
         <?php
         endforeach;

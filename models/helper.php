@@ -52,3 +52,18 @@ function topic($link, $id_topic)
     $topic_arr = mysqli_fetch_assoc($result);
     return $topic_arr;
 }
+
+function addTopic ($link, $topic, $author, $description)
+{
+    $topic = mysqli_real_escape_string($link, trim($topic));
+    $author = mysqli_real_escape_string($link, trim($author));
+    $description = mysqli_real_escape_string($link, trim($description));
+    $query = sprintf("INSERT INTO forum (topic, author, description) VALUE ('%s', '%s', '%s')",
+        $topic, $author, $description);
+    $result = mysqli_query($link, $query) or die(mysqli_error($link));
+    $r = mysqli_affected_rows($link);
+    if ($r == 1) {
+        return true;
+    } else return false;
+
+}
