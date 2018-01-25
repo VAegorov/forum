@@ -2,8 +2,8 @@
 require_once "models/helper.php";
 $link = db_connect();
 
-$value_topic_page = 1; //количество тем на одной странице
-$count_show_pages = 10;//количество страниц в пагинации
+$value_topic_page = 4; //количество тем на одной странице
+$count_show_pages = 5;//количество страниц в пагинации
 
 if (isset($_GET['add_topic'])) {
     echo "Тема добавлена";
@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
 /* Пагинация */
 $active = 1;//активная страница
 if (isset($_GET['page'])) {
-    echo $active = $_GET['page'];
+    $active = $_GET['page'];
 }
 $all_topic = allTopic($link, $active, $value_topic_page);
 $count_topic = countTopic($link);

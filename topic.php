@@ -2,6 +2,9 @@
 require_once "models/helper.php";
 $link = db_connect();
 
+$value_answer_page = 1; //количество ответов на одной странице
+$count_show_pages = 10;//количество страниц в пагинации
+
 if (isset($_GET['add_answer'])) {
     $id_topic = (int)$_GET['add_answer'];
     echo "Ответ добавлен";
@@ -26,6 +29,21 @@ if (isset($_GET['id_topic'])) {
     $id_topic = $_GET['id_topic'];
 }
 $topic_arr = topic($link, $id_topic);
-$answeres = answersGet($link, $id_topic);
+
+$active = 1;//активная страница
+if (isset($_GET['page'])) {
+    $active = $_GET['page'];
+}
+
+$answeres = answersGet($link, $id_topic, $active, $value_answer_page);
+
+/* Пагинация */
+
+$all_answers = answersGet($link, $id_topic, $active, $value_answer_page);
+$count_answers = countAnswers($link, $id_topic);
+$count_pages = ceil($count_answers/$value_answer_page);//количество страниц
+$url = "topic.php?id_topic=$id_topic";
+$url_page = "topic.php?id_topic=$id_topic&page=";
+
 
 include "views/topic-v.php";

@@ -1,4 +1,6 @@
 <?php
+
+//соединение с базой данных
 function db_connect()
 {
     $host = 'localhost';
@@ -10,12 +12,13 @@ function db_connect()
     return $link;
 }
 
+//вывод всех тем
 function allTopic($link, $active, $value_topic_page)
 {
     if ($active == 1) {
-        echo $start = 0;
+        $start = 0;
     } else {
-        echo $start = ($active - 1) * $value_topic_page;
+        $start = ($active - 1) * $value_topic_page;
     }
 
     $query = "SELECT * FROM forum LIMIT $start, $value_topic_page";
@@ -27,6 +30,7 @@ function allTopic($link, $active, $value_topic_page)
     return $all_topic;
 }
 
+//количество ответов для одной темы
 function countAnswers($link, $id_topic)
 {
     $id_topic = (int) $id_topic;
@@ -37,10 +41,17 @@ function countAnswers($link, $id_topic)
     return $count_answers;
 }
 
-function answersGet($link, $id_topic)
+//ответы для одной темы
+function answersGet($link, $id_topic, $active, $value_answer_page)
 {
+    if ($active == 1) {
+        $start = 0;
+    } else {
+        $start = ($active - 1) * $value_answer_page;
+    }
+
     $id_topic = (int) $id_topic;
-    $query = "SELECT date, author, description FROM description_forum WHERE id_topic=$id_topic";
+    $query = "SELECT date, author, description FROM description_forum WHERE id_topic=$id_topic LIMIT $start, $value_answer_page";
     $result = mysqli_query($link, $query) or die(mysqli_error($link));
     $answers = [];
     while ($data = mysqli_fetch_assoc($result)) {
@@ -49,6 +60,7 @@ function answersGet($link, $id_topic)
     return $answers;
 }
 
+//вывод одной темы
 function topic($link, $id_topic)
 {
     $query = "SELECT * FROM forum WHERE id_topic=$id_topic";
@@ -57,6 +69,7 @@ function topic($link, $id_topic)
     return $topic_arr;
 }
 
+//добавить тему
 function addTopic ($link, $topic, $author, $description)
 {
     $topic = mysqli_real_escape_string($link, trim($topic));
@@ -72,6 +85,7 @@ function addTopic ($link, $topic, $author, $description)
 
 }
 
+//добавить ответ
 function addAnswer ($link, $id_topic, $author, $description)
 {
     $id_topic = mysqli_real_escape_string($link, trim($id_topic));
@@ -86,6 +100,7 @@ function addAnswer ($link, $id_topic, $author, $description)
     } else return false;
 }
 
+//общее количество тем
 function countTopic($link)
 {
     $query = "SELECT COUNT(id_topic) AS count FROM forum";
@@ -94,7 +109,6 @@ function countTopic($link)
     $count = $count_arr['count'];
     return $count;
 }
-
 
 
 
