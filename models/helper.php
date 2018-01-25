@@ -10,9 +10,15 @@ function db_connect()
     return $link;
 }
 
-function allTopic($link)
+function allTopic($link, $active, $value_topic_page)
 {
-    $query = "SELECT * FROM forum";
+    if ($active == 1) {
+        echo $start = 0;
+    } else {
+        echo $start = ($active - 1) * $value_topic_page;
+    }
+
+    $query = "SELECT * FROM forum LIMIT $start, $value_topic_page";
     $result = mysqli_query($link, $query) or die(mysqli_error($link));
     $all_topic = [];
     while ($data = mysqli_fetch_assoc($result)) {
@@ -80,7 +86,7 @@ function addAnswer ($link, $id_topic, $author, $description)
     } else return false;
 }
 
-function countPageTopic($link)
+function countTopic($link)
 {
     $query = "SELECT COUNT(id_topic) AS count FROM forum";
     $result = mysqli_query($link, $query) or die(mysqli_error($link));
